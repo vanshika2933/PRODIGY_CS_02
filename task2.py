@@ -1,8 +1,7 @@
 from PIL import Image 
 
 # Create an image as input: 
-input_image = Image.new(mode="RGB", size=(400, 400), 
-						color="blue") 
+input_image = "C:\Users\HP\OneDrive\Pictures\1000101577.jpg" 
 
 # save the image as "input.png" 
 #(not mandatory) 
