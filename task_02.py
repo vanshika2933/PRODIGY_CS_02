@@ -1,25 +1,31 @@
 from PIL import Image 
 
-input_image = "1000101577.jpg" 
+input_image = Image.open("1000101577.jpg") 
 
-input_image.save("input", format="jpg") 
-
+# Extracting pixel map: 
 pixel_map = input_image.load() 
 
+# Extracting the width and height 
+# of the image: 
 width, height = input_image.size 
-z = 100
-for i in range(width): 
+
+# taking half of the width: 
+for i in range(width//2): 
 	for j in range(height): 
 		
-		if((i >= z and i <= width-z) and (j >= z and j <= height-z)): 
-			pixel_map[i, j] = (255, 165, 0) 
-		else:  
-			pixel_map[i, j] = (255, 160, 122) 
+		# getting the RGB pixel value. 
+		r, g, b, p = input_image.getpixel((i, j)) 
+		
+		# Apply formula of grayscale: 
+		grayscale = (0.299*r + 0.587*g + 0.114*b) 
 
-for i in range(width):  
-	pixel_map[i, i] = (0, 0, 255) 
-	pixel_map[i, width-i-1] = (0, 0, 255) 
+		# setting the pixel value. 
+		pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale)) 
 
-input_image.save("output", format="jpg") 
+# Saving the final output 
+# as "grayscale.png": 
+input_image.save("grayscale", format="png") 
 
-input_image.show("output", format="jpg")
+# use input_image.show() to see the image on the 
+# output screen. 
+
